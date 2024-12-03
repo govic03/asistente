@@ -120,7 +120,7 @@ const MainPage: React.FC<MainPageProps> = ({ className, isSidebarCollapsed, togg
           console.log("Llamo a inicios de saludo:", safeCurso);
           sendInitialMessage();
           setInitialMessageSent(true);
-        }, 6000); // 2000 milisegundos = 2 segundos
+        }, 4000); // 2000 milisegundos = 2 segundos
   
         // Limpiar el timeout si el componente se desmonta o las dependencias cambian
         return () => clearTimeout(timeoutId);

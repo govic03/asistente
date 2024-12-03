@@ -283,43 +283,16 @@ export class ChatService {
     let isEndCalled = false;
   
     // Claves para la caché
-    const cachedNombreKey = "cached_user_name";
-    const cachedCursoKey = "cached_course_name";
-  
-    // Manejar el nombre del usuario
-    let finalNombre = nombre?.trim() || "Usuario"; 
-    if (nombre !== null && nombre !== undefined) {
-      // Si llega un nombre nuevo, actualizar la caché
-      finalNombre = nombre.trim();
-      localStorage.setItem(cachedNombreKey, finalNombre);
-    } else {
-      // Si no hay un nombre nuevo, usar el de la caché
-      const cachedNombre = localStorage.getItem(cachedNombreKey);
-      if (cachedNombre !== null && cachedNombre !== undefined) {
-        finalNombre = cachedNombre.trim();
-      } else {
-        finalNombre = "Usuario"; // Valor por defecto si no hay nombre en caché
-      }
-    }
-  
+    const cachedNombre = localStorage.getItem("cached_user_name");
+    const cachedCurso = localStorage.getItem("cached_course_name");
+
+    // Determinar el nombre final usando el orden de prioridad
+    const finalNombre = (nombre?.trim() || cachedNombre?.trim() || "Usuario").trim();
     console.log("Nombre final usado:", finalNombre);
-  
-    // Manejar el curso
-    let finalCurso = curso;
-    if (curso !== null && curso !== undefined) {
-      finalCurso = curso.trim();
-      localStorage.setItem(cachedCursoKey, finalCurso);
-    } else {
-      const cachedCurso = localStorage.getItem(cachedCursoKey);
-      if (cachedCurso !== null && cachedCurso !== undefined) {
-        finalCurso = cachedCurso.trim();
-      } else {
-        finalCurso = ""; // Valor por defecto si no hay curso en caché
-      }
-    }
-  
+
+    // Determinar el curso final usando el orden de prioridad
+    const finalCurso = (curso?.trim() || cachedCurso?.trim() || "").trim();
     console.log("Curso final usado:", finalCurso);
-  
     // Normalizar el nombre del curso
     const normalizeCursoName = (cursoName: string | null): string | null => {
       if (!cursoName) return null;

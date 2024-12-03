@@ -24,11 +24,13 @@ const withNombreCursoCapture = (WrappedComponent) => {
       // Actualiza solo si hay cambios
       if (nombreParam && nombreParam !== nombre) {
         setNombre(nombreParam);
+        localStorage.setItem("cached_user_name", nombreParam);
         console.log("Nombre capturado de la URL:", nombreParam);
       }
 
       if (cursoParam && cursoParam !== curso) {
         setCurso(cursoParam);
+        localStorage.setItem("cached_course_name", cursoParam);
         console.log("Curso capturado de la URL:", cursoParam);
       }
 

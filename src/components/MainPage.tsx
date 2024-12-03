@@ -131,6 +131,7 @@ const MainPage: React.FC<MainPageProps> = ({ className, isSidebarCollapsed, togg
     
         const animationId = requestAnimationFrame(animate);
         return () => cancelAnimationFrame(animationId);
+      }
      
     }
   }, [curso]);

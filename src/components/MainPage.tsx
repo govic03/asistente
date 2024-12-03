@@ -114,17 +114,23 @@ const MainPage: React.FC<MainPageProps> = ({ className, isSidebarCollapsed, togg
       setCleanCurso(safeCurso); // Asignar el valor directo si no necesita modificaciones
       console.log("Curso recibido2:", safeCurso);
       console.log("estado inicial ",initialMessageSent);
-      if (!initialMessageSent) {
-        // Introducir un retraso de 2 segundos antes de enviar el mensaje inicial
-        const timeoutId = setTimeout(() => {
-          console.log("Llamo a inicios de saludo:", safeCurso);
-          sendInitialMessage();
-          setInitialMessageSent(true);
-        }, 4000); // 2000 milisegundos = 2 segundos
-  
-        // Limpiar el timeout si el componente se desmonta o las dependencias cambian
-        return () => clearTimeout(timeoutId);
-      }
+      if ( !initialMessageSent) {
+        let frameCount = 0;
+        const targetFrames = 360; // aproximadamente 6 segundos a 60fps
+    
+        const animate = () => {
+          frameCount++;
+          if (frameCount >= targetFrames) {
+            console.log("Llamo a inicios de saludo:", safeCurso);
+            sendInitialMessage();
+            setInitialMessageSent(true);
+            return;
+          }
+          requestAnimationFrame(animate);
+        };
+    
+        const animationId = requestAnimationFrame(animate);
+        return () => cancelAnimationFrame(animationId);
      
     }
   }, [curso]);

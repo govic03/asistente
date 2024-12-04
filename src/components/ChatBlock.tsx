@@ -196,7 +196,7 @@ const ChatBlock: React.FC<Props> = ({
               className={`flex flex-grow flex-col gap-3 ${className || ''}`}
               style={{
                 ...errorStyles,
-                fontFamily: ['Opens Sans', 'cursive', 'sans-serif'].join(', '),
+                fontFamily: ['Gandhi Sans'].join(', '),
                   fontWeight: 'normal',
                 color: block.role === Role.User ? 'white' : 'black',
                 fontSize: block.role === Role.Assistant ? '180%' : 'inherit',
